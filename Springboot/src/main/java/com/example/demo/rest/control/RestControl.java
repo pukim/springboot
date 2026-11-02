@@ -22,5 +22,21 @@ public class RestControl {
 
         return result;
 	}
+
+
+	    public CompletableFuture<ResponseEntity<Response>> getMailList(@RequestBody SearchParams params) throws Exception {
+    	Response <RawValue> response = new Response <RawValue>();
+    	Locale locale = LocaleContextHolder.getLocale();
+    	
+    	return homeService.getMailList(params)
+                .thenApply(result -> {
+                    log.info("Controller: 결과 가공 및 반환 (Thread: {})", Thread.currentThread().getName());
+                    response.setResult(Constants.SUCCESS_COMMON); 
+	          	    response.setResultMessage(messageService.getMessage(Constants.SUCCESS_COMMON, locale));
+	          	    response.setResponse(new RawValue(result));
+	          	    
+                    return ResponseEntity.ok(response);
+         });
+    }
         		 
 }
