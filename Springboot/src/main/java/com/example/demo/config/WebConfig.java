@@ -35,4 +35,15 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedHeaders("*")
                 .allowCredentials(true);
     }
+
+	    
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        // http://localhost:8080/uploads/filename.png 접속 시 실제 디렉토리 파일 제공
+    	String absolutePath = new File(uploadDir).getAbsolutePath();
+    	String resourceLocation = "file:///" + absolutePath.replace("\\", "/") + "/";
+    	
+        registry.addResourceHandler("/files/**")
+                .addResourceLocations(resourceLocation);
+    }
 }
