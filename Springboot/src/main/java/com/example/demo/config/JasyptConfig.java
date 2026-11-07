@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -8,6 +9,14 @@ import org.springframework.context.annotation.PropertySource;
   public class JasyptConfig {
 
     @Value("${jasypt.key}")
+=======
+@Configuration
+@PropertySource("classpath:key.properties") // src/main/resources/key.properties 참조
+
+  public class JasyptConfig {
+
+    	@Value("${jasypt.key}")
+>>>>>>> branch 'master' of https://github.com/pukim/springboot.git
 	private String key;
 	
 	@Bean("jasyptStringEncryptor")
