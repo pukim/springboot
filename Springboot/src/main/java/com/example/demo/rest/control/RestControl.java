@@ -1,6 +1,12 @@
 package com.example.demo.rest.control;
 
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
@@ -10,8 +16,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.demo.common.vo.FileUploadResponse;
 import com.example.demo.common.vo.Response;
 import com.example.demo.common.vo.SearchParams;
 import com.example.demo.rest.service.RestService;
@@ -49,21 +59,21 @@ public class RestControl {
          });
     }
 
-	    @Value("${file.upload-dir}")
+	@Value("${file.upload-dir}")
     private String uploadDir;
 
     @PostMapping(value = "/api/upload/files", consumes = {"multipart/form-data"})
-    public ResponseEntity<List<FileUploadResponse>> uploadFiles(
+    public ResponseEntity<List<Response>> uploadFiles(
         //  @RequestPart("data") ItemRequestDto requestDto,
     	//    @RequestPart("data") SearchParams params,
             @RequestPart("files") List<MultipartFile> files) {
 
-        List<FileUploadResponse> responses = new ArrayList<>();
+       List<FileUploadResponse> responses = new ArrayList<>();
 
-		 LocalDate date = LocalDate.now();
-       DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+	   LocalDate date = LocalDate.now();
+       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
        
-              String today = date.format("yyyyMMdd");
+       String today = date.format(formatter);
         
         
         File targetDir = new File(uploadDir, today);
