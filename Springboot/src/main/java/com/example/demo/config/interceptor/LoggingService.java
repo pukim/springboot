@@ -1,5 +1,7 @@
+// 응답 로깅
+package com;
 
-	// 응답 로깅
+
 	@Async
 	public void excuteAccessLog(HttpServletRequest request, int responseCode, String  responseBody, String trace) {
 		try {

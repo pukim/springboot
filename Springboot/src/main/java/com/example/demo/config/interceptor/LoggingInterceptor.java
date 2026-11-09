@@ -1,3 +1,16 @@
+package com.example.demo.config.interceptor;
+
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.AsyncHandlerInterceptor;
+
+import com.example.demo.common.vo.SearchParams;
+import com.nimbusds.jose.shaded.gson.JsonObject;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
+import tools.jackson.databind.ObjectMapper;
 
 @Slf4j
 @Component
@@ -5,7 +18,7 @@
 
 
   public class LoggingInterceptor extends HandlerInterceptorAdapter implements  AsyncHandlerInterceptor { /// HandlerInterceptor  {
-public LoggingInterceptor() {
+	public LoggingInterceptor() {
 		super();
 	}
 
@@ -51,10 +64,12 @@ public LoggingInterceptor() {
 		            
 		        	JsonObject user = new JsonObject();
 		        	try {
+		        		/*
 			        	user.put("empId", params.getEmpId());
 			        	user.put("companyCd", params.getCompanyCd());
 			        	user.put("name" , getUserInfo(params.getEmpId(), "userNm"));
 			        	user.put("mdn"  , getUserInfo(params.getEmpId(), "mobile"));
+			        	*/
 		        	} catch(Exception e) {
 		        		log.error(e.getMessage());
 		        	}
@@ -90,7 +105,7 @@ public LoggingInterceptor() {
 			}
 		    */
 
-			loggingService.initAccessLog(request, sessionObj);
+			//loggingService.initAccessLog(request, sessionObj);
 
 		} catch (Exception e) {
 			e.printStackTrace();
