@@ -2,9 +2,11 @@ package com.example.demo.common.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;
-import java.util.Base64;
-
 import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+
+import org.apache.commons.codec.binary.Base64;;
 import javax.crypto.spec.SecretKeySpec;
 
 public class StringUtils {
