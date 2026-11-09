@@ -28,7 +28,7 @@ public class RedisConfig {
 	 private String activeMode;
 	 private String clusterNodes;
 	 
-	 @Bean
+	@Bean(name = "hcpRedisConnectionFactory") 
 	 public RedisConnectionFactory redisConnectionFactory() {
 
    		if("prd".equals(activeMode)) {  // redis cluster 연결
